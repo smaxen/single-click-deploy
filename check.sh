@@ -6,6 +6,5 @@ set -o pipefail
 
 echo "Running check"
 
-echo "My bad"
-exit 1
+exit 0
 
