@@ -39,20 +39,17 @@ workflows:
   workflow:
     jobs:
       - build:
-        jobs:
-          - build
 
       - tag-approval:
-          type: approval
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - main
+        type: approval
+        requires:
+          - build
+        filters:
+          branches:
+            only:
+              - main
 
       - do-tag:
           requires:
             - tag-approval
-          jobs:
-            - do-tag
+
