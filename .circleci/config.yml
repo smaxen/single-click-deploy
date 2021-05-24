@@ -29,10 +29,13 @@ jobs:
     resource_class: small
     steps:
       - checkout
+      - add_ssh_keys:
+        fingerprints:
+          - "66:e2:76:a8:ca:51:54:d9:1d:11:30:dc:e5:b1:7f:0d"
       - run:
           name: Run Check Script
           command: |
-            git tag "job-$CIRCLE_BUILD_NUM"
+            git tag "build-$CIRCLE_BUILD_NUM"
             git push --tags
 
 workflows:
