@@ -24,7 +24,7 @@ jobs:
     #   JVM_OPTS: -Xmx3200m
     #   TERM: dumb
     docker:
-      - image: circleci/openjdk:11.0.9.1-jdk-buster
+      - image: circleci/openjdk:11.0.8-jdk-buster
     steps:
       - checkout
 
