@@ -38,7 +38,7 @@ jobs:
 workflows:
   workflow:
     jobs:
-      - build:
+      - build
 
       - tag-approval:
         type: approval
