@@ -41,13 +41,13 @@ workflows:
       - build
 
       - tag-approval:
-        type: approval
-        requires:
-          - build
-        filters:
-          branches:
-            only:
-              - main
+          type: approval
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - main
 
       - do-tag:
           requires:
