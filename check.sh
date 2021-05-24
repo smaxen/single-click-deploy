@@ -4,7 +4,7 @@ set -o nounset
 set -o errexit
 set -o pipefail
 
-echo "Running check"
+echo "Run: $CIRCLE_BUILD_NUM"
 
 exit 0
 

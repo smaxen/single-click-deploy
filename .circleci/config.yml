@@ -4,12 +4,12 @@ version: 2.1
 orbs:
   docker: circleci/docker@1.4.0
 
-commands:
-  do-check:
-    steps:
-      - run:
-          name: Run Check Script
-          command: ./check.sh
+# commands:
+#   do-check:
+#     steps:
+#       - run:
+#           name: Run Check Script
+#           command: ./check.sh
 
 jobs:
   build:
@@ -18,10 +18,37 @@ jobs:
     resource_class: small
     steps:
       - checkout
-      - do-check
+      - run:
+          name: Run Check Script
+          command: ./check.sh
+
+  do-tag:
+    steps:
+      - checkout
+      - run:
+          name: Run Check Script
+          command: |
+            git tag "job-$CIRCLE_BUILD_NUM"
+            git push --tags
 
 workflows:
-  welcome:
+  workflow:
     jobs:
-      - build
+      - build:
+        jobs:
+          - build
 
+      - tag-approval:
+          type: approval
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - main
+
+      - do-tag:
+          requires:
+            - tag-approval
+          jobs:
+            - do-tag
