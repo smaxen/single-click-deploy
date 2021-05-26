@@ -38,6 +38,8 @@ jobs:
             git config user.email "no-reply@github.com"
             git config user.name "Release Script"
 
+      - gh/setup
+
       - run:
           name: Dump env
           command: env
@@ -45,7 +47,6 @@ jobs:
       - run:
           name: Run Release Script
           command: ./release.sh
-
 
 
 workflows:
