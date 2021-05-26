@@ -131,7 +131,7 @@ function main {
 	checkForUnsavedChanges
 	local version=$(deriveVersion)
 	echo "Releasing version: $version"
-	checkWhatsNew
+	# checkWhatsNew
 	buildRelease $version
 	applyTag $version
 	publishRelease $version
