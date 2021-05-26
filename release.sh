@@ -4,10 +4,12 @@ set -o nounset
 set -o errexit
 set -o pipefail
 
-relDir=./release/build
+relBuildDir=./release/build
 relNoteDir=./release/notes
-whatsNew="./WHATSNEW.md"
+whatsNew="WHATSNEW.md"
 whatsNewTemplate="./release/WHATSNEW-template.md"
+
+mkdir -p $relBuildDir
 
 function fatal {
 	echo "Fatal: $1" 1>&2
@@ -30,6 +32,7 @@ function checkPreviousReleaseNoteUpdateMerged {
 function checkWhatsNew {
 	[ -f $whatsNew ] || fatal "Did not find $whatsNew"
 	diff -w $whatsNew $whatsNewTemplate > /dev/null && fatal "$whatsNew has not been updated"
+	true
 }
 
 function deriveVersion {
@@ -74,8 +77,20 @@ function deriveVersion {
 # Push packages/images
 function buildRelease {
 	local version=$1
-	git tag "v$version"
-	git push --tags
+	echo "Building release for $version"
+	(
+		cd $relNoteDir
+		echo -e "# Release Notes\n"
+		echo -e "## What's New in Version $version\n"
+		cat ../../$whatsNew
+		for note in *.md
+		do
+			local noteVersion=${note%.md}
+			echo -e "## $noteVersion\n"
+			cat $note
+		done
+	) > $relBuildDir/release-notes.md
+
 }
 
 # Push packages/images
@@ -100,15 +115,14 @@ function updateReleaseNotesPullRequest {
 
 function main {
 	# checkForUnsavedChanges
-	# local version=$(deriveVersion)
-	version=0.2.0
+	local version=$(deriveVersion)
 	echo "Releasing version: $version"
-	checkPreviousReleaseNoteUpdateMerged $version
 	checkWhatsNew
 	buildRelease $version
 	# applyTag $version
 	# publishRelease $version
 	# updateReleaseNotes $version
+	echo "Complete"
 }
 
 main
