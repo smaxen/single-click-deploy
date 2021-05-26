@@ -120,7 +120,8 @@ function addReleaseNote {
     git commit -m"[skip ci] Add $version release note"
 		git push --set-upstream origin $branch
 
-		gh pr create --title "Add $version release note" --base $refBranch
+		echo "Creating a PR"
+		DEBUG=1 gh pr create --title "Add $version release note" --base $refBranch
 
 		git checkout $refBranch
 
