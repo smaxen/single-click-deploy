@@ -1,4 +1,4 @@
 ### Notes
 
-- Now check for whatsnew update again
+- Enter here details of updates included in the release
 
