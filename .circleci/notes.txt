@@ -1,12 +1,4 @@
 
-CIRCLE_BRANCH	             String	  The name of the Git branch currently being built.
-CIRCLE_BUILD_NUM	         Integer	The number of the current job. Job numbers are unique for each job.
-CIRCLE_PROJECT_REPONAME	   String	  The name of the repository of the current project.
-CIRCLE_PROJECT_USERNAME	   String	  The GitHub or Bitbucket username of the current project.
-CIRCLE_SHA1	               String	  The SHA1 hash of the last commit of the current build.
-
-
-
 
 # Built-in environment variables
 
