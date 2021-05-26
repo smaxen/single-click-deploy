@@ -13,8 +13,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Run Check Script
-          command: ./check.sh
+          name: Run Build Script
+          command: ./build.sh
 
   do-tag:
     docker:
@@ -23,12 +23,16 @@ jobs:
     steps:
       - checkout
 
+      - run:
+          name: Run Build Script
+          command: ./build.sh
+
       - add_ssh_keys:
           fingerprints:
             - "66:e2:76:a8:ca:51:54:d9:1d:11:30:dc:e5:b1:7f:0d"
-              
+
       - run:
-          name: Run Check Script
+          name: Run Release Script
           command: ./release.sh
 
 workflows:

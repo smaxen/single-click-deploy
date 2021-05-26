@@ -111,17 +111,29 @@ function publishRelease {
 function updateReleaseNotesPullRequest {
 	local version=$1
 	echo "Updating release notes following $version"
+
+		# git config user.email "no-reply@digitalasset.com"
+		# git config user.name "CircleCI Release Build"
+
+		branch="update-$version"
+		git co -b $branch
+		git mv $whatsNew "$relNoteDir/$version.md"
+		git cp $whatsNewTemplate $whatsNew
+		git add "$relNoteDir/$version.md" $whatsNew
+    git commit -m"[skip ci] Add $version release note"
+		git push --set-upstream origin $branch
+
 }
 
 function main {
-	# checkForUnsavedChanges
+	checkForUnsavedChanges
 	local version=$(deriveVersion)
 	echo "Releasing version: $version"
 	checkWhatsNew
 	buildRelease $version
-	# applyTag $version
-	# publishRelease $version
-	# updateReleaseNotes $version
+	applyTag $version
+	publishRelease $version
+	updateReleaseNotes $version
 	echo "Complete"
 }
 
