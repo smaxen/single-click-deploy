@@ -121,7 +121,7 @@ function addReleaseNote {
 		git push --set-upstream origin $branch
 
 		echo "Creating a PR"
-		DEBUG=1 gh pr create --title "Add $version release note" --base $refBranch
+		DEBUG=1 gh pr create --title "Add $version release note" --body "Add $version release note" --base $refBranch
 
 		git checkout $refBranch
 
