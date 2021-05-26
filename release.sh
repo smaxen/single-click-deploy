@@ -108,7 +108,7 @@ function publishRelease {
 }
 
 # Update release notes
-function updateReleaseNotesPullRequest {
+function addReleaseNote {
 	local version=$1
 	echo "Updating release notes following $version"
 
@@ -133,7 +133,7 @@ function main {
 	buildRelease $version
 	applyTag $version
 	publishRelease $version
-	updateReleaseNotes $version
+	addReleaseNote $version
 	echo "Complete"
 }
 
