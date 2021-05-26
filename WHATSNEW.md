@@ -1,4 +1,4 @@
 ### Notes
 
-- Sure I did something
+- Enter here details of updates included in the release
 
