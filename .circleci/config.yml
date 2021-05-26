@@ -3,6 +3,7 @@ version: 2.1
 
 orbs:
   docker: circleci/docker@1.4.0
+  github-cli: circleci/github-cli@1.0.2
 
 jobs:
 
@@ -40,6 +41,9 @@ jobs:
       - run:
           name: Run Release Script
           command: ./release.sh
+
+      - env
+
 
 workflows:
   workflow:
