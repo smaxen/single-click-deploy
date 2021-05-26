@@ -26,7 +26,7 @@ jobs:
     context:
       GITHUB_TOKEN
     
-      steps:
+    steps:
       - checkout
 
       - run:
