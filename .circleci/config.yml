@@ -32,19 +32,20 @@ jobs:
           fingerprints:
             - "66:e2:76:a8:ca:51:54:d9:1d:11:30:dc:e5:b1:7f:0d"
 
-      # - run:
-      #     name: Run Release Script
-      #     command: |
-      #       git config user.email "no-reply@github.com"
-      #       git config user.name "Release Script"
+      - run:
+          name: Run Release Script
+          command: |
+            git config user.email "no-reply@github.com"
+            git config user.name "Release Script"
+
+      - run:
+          name: Dump env
+          command: env
 
       - run:
           name: Run Release Script
           command: ./release.sh
 
-      - run:
-          name: Dump env
-          command: env
 
 
 workflows:
