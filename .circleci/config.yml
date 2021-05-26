@@ -45,9 +45,9 @@ jobs:
 
       - gh/setup
 
-      # - run:
-      #     name: Run Release Script
-      #     command: ./release.sh
+      - run:
+          name: Run Release Script
+          command: ./release.sh
 
 
 workflows:
