@@ -20,12 +20,7 @@ jobs:
   do-tag:
     docker:
       - image: circleci/openjdk:11.0.8-jdk-buster
-      
     resource_class: small
-    
-    context:
-      GITHUB_TOKEN
-    
     steps:
       - checkout
 
@@ -43,11 +38,13 @@ jobs:
             git config user.email "no-reply@github.com"
             git config user.name "Release Script"
 
+      - gh/setup:
+          context:
+            - GITHUB_CREDS
+
       - run:
           name: Dump env
           command: env
-
-      - gh/setup
 
       - run:
           name: Run Release Script
