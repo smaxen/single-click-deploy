@@ -42,7 +42,9 @@ jobs:
           name: Run Release Script
           command: ./release.sh
 
-      - env
+      - run:
+          name: Dump env
+          command: env
 
 
 workflows:
