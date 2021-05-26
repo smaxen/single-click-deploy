@@ -117,22 +117,22 @@ function addReleaseNote {
 		git mv $whatsNew "$relNoteDir/$version.md"
 		cp $whatsNewTemplate $whatsNew
 		git add "$relNoteDir/$version.md" $whatsNew
-    git commit -m"[skip ci] Add $version release note"
+		local message="Add $version release note"
+    git commit -m"[skip ci] $message"
 		git push --set-upstream origin $branch
 
 		echo "Creating a PR"
-		DEBUG=1 gh pr create --title "Add $version release note" --body "Add $version release note" --base $refBranch
+		gh pr create --title "$message" --body "$message" --base $refBranch
 
 		git checkout $refBranch
-
-		 
+ 
 }
 
 function main {
 	checkForUnsavedChanges
 	local version=$(deriveVersion)
 	echo "Releasing version: $version"
-	# checkWhatsNew
+	checkWhatsNew
 	buildRelease $version
 	applyTag $version
 	publishRelease $version
