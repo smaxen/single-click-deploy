@@ -111,18 +111,15 @@ function publishRelease {
 function addReleaseNote {
 	local version=$1
 	echo "Updating release notes following $version"
-
-		# git config user.email "no-reply@digitalasset.com"
-		# git config user.name "CircleCI Release Build"
-
-		branch="update-$version"
-		git co -b $branch
+		local refBranch=$(git rev-parse --abbrev-ref HEAD)
+		local branch="update-$version"
+		git checkout -b $branch
 		git mv $whatsNew "$relNoteDir/$version.md"
-		git cp $whatsNewTemplate $whatsNew
+		cp $whatsNewTemplate $whatsNew
 		git add "$relNoteDir/$version.md" $whatsNew
     git commit -m"[skip ci] Add $version release note"
 		git push --set-upstream origin $branch
-
+		git checkout $refBranch
 }
 
 function main {
