@@ -1,4 +1,3 @@
 ### Notes
 
-- Enter here details of updates included in the release
-
+- Doing a demo to the team
